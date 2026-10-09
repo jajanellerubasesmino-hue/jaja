@@ -1,0 +1,1636 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#fff7fb">
+  <title>Janelle Rubas Esmino | Portfolio</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <style>
+    :root {
+      --pink: #d98ab0;
+      --pink-dark: #a94f7d;
+      --pink-light: #f8dce9;
+      --lavender: #e8def8;
+      --cream: #fffaf5;
+      --ink: #403342;
+      --muted: #786c7b;
+      --glass: rgba(255, 255, 255, 0.76);
+      --border: rgba(190, 125, 163, 0.23);
+      --shadow: 0 16px 50px rgba(120, 71, 106, 0.10);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "DM Sans", sans-serif;
+      background: var(--cream);
+      color: var(--ink);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button, input, textarea {
+      font: inherit;
+    }
+
+    /* Animated background */
+    .background {
+      position: fixed;
+      inset: 0;
+      z-index: -5;
+      overflow: hidden;
+      pointer-events: none;
+      background: linear-gradient(
+        125deg,
+        #fffaf6,
+        #fff0f7,
+        #f4edff,
+        #fff7fb,
+        #fce7ef
+      );
+      background-size: 300% 300%;
+      animation: gradientFlow 20s ease infinite;
+    }
+
+    @keyframes gradientFlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .orb {
+      position: absolute;
+      width: 360px;
+      height: 360px;
+      border-radius: 50%;
+      filter: blur(65px);
+      opacity: 0.30;
+      animation: orbFloat 15s ease-in-out infinite alternate;
+    }
+
+    .orb.one {
+      background: #f4bad7;
+      top: 5%;
+      left: -150px;
+    }
+
+    .orb.two {
+      background: #d9c6fa;
+      right: -150px;
+      top: 35%;
+      animation-delay: -5s;
+    }
+
+    .orb.three {
+      background: #ffe0d5;
+      left: 30%;
+      bottom: -200px;
+      animation-delay: -9s;
+    }
+
+    @keyframes orbFloat {
+      from { transform: translate(0, 0) scale(1); }
+      to { transform: translate(70px, -55px) scale(1.2); }
+    }
+
+    /* Moving network canvas */
+    #network {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+      pointer-events: none;
+      opacity: 0.72;
+    }
+
+    /* Falling petals */
+    #petals {
+      position: fixed;
+      inset: 0;
+      z-index: 5;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .petal {
+      position: absolute;
+      top: -35px;
+      color: #d889b0;
+      opacity: 0.52;
+      animation: petalFall linear infinite;
+      filter: drop-shadow(0 2px 3px rgba(170, 95, 139, 0.15));
+    }
+
+    @keyframes petalFall {
+      0% {
+        transform: translate3d(0, -5vh, 0) rotate(0deg);
+        opacity: 0;
+      }
+      10% { opacity: 0.55; }
+      90% { opacity: 0.45; }
+      100% {
+        transform: translate3d(100px, 110vh, 0) rotate(480deg);
+        opacity: 0;
+      }
+    }
+
+    /* Navigation */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 20;
+      padding: 15px 6%;
+      background: rgba(255, 250, 253, 0.80);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(190, 125, 163, 0.13);
+    }
+
+    nav {
+      max-width: 1200px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .logo {
+      font-family: "Playfair Display", serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--pink-dark);
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 23px;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-links a {
+      font-size: 0.87rem;
+      color: #655363;
+      transition: color 0.25s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--pink-dark);
+    }
+
+    .menu-toggle {
+      display: none;
+      border: 0;
+      background: transparent;
+      color: var(--pink-dark);
+      font-size: 1.4rem;
+      cursor: pointer;
+    }
+
+    /* Main layout */
+    main, footer {
+      position: relative;
+      z-index: 1;
+    }
+
+    section {
+      padding: 100px 7%;
+      scroll-margin-top: 75px;
+    }
+
+    .container {
+      width: min(1100px, 100%);
+      margin: auto;
+    }
+
+    .section-heading {
+      text-align: center;
+      margin-bottom: 45px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      color: var(--pink-dark);
+      font-size: 0.77rem;
+      letter-spacing: 2.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    h1, h2, h3 {
+      font-family: "Playfair Display", serif;
+      line-height: 1.2;
+    }
+
+    .section-heading h2 {
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      margin-bottom: 12px;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+      max-width: 610px;
+      margin: auto;
+    }
+
+    .accent {
+      color: var(--pink-dark);
+    }
+
+    .glass {
+      background: var(--glass);
+      border: 1px solid rgba(255,255,255,0.88);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(14px);
+      border-radius: 24px;
+    }
+
+    /* Hero */
+    #home {
+      min-height: 100vh;
+      padding-top: 125px;
+      display: flex;
+      align-items: center;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      align-items: center;
+      gap: 55px;
+    }
+
+    .hero-copy {
+      animation: enterLeft 1s ease both;
+    }
+
+    .hero-copy .eyebrow {
+      padding: 8px 14px;
+      border-radius: 50px;
+      background: rgba(255,255,255,0.72);
+      border: 1px solid var(--border);
+    }
+
+    .hero h1 {
+      font-size: clamp(2.7rem, 6vw, 4.8rem);
+      letter-spacing: -1.5px;
+      margin: 15px 0 20px;
+    }
+
+    .hero h1 span {
+      display: block;
+      color: var(--pink-dark);
+    }
+
+    .hero-copy > p {
+      max-width: 540px;
+      color: var(--muted);
+      font-size: 1.04rem;
+      margin-bottom: 28px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 13px;
+    }
+
+    .btn {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 9px;
+      padding: 12px 21px;
+      border-radius: 50px;
+      font-size: 0.91rem;
+      font-weight: 700;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(169, 79, 125, 0.17);
+    }
+
+    .btn-primary {
+      background: var(--pink-dark);
+      color: white;
+    }
+
+    .btn-outline {
+      background: rgba(255,255,255,0.72);
+      color: var(--pink-dark);
+      border-color: var(--border);
+    }
+
+    .hero-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-width: 0;
+      animation: enterRight 1s ease both;
+    }
+
+    /* Profile frame: animated halo and preserved photo */
+    .portrait-wrap {
+      position: relative;
+      width: min(350px, 75vw);
+      aspect-ratio: 0.82;
+      display: grid;
+      place-items: center;
+      animation: portraitFloat 5s ease-in-out infinite;
+    }
+
+    .portrait-halo {
+      position: absolute;
+      inset: -12px;
+      border-radius: 48% 48% 35% 35%;
+      background: conic-gradient(
+        from 0deg,
+        #e8b0ce,
+        #d6c1f5,
+        #fff1e7,
+        #d98ab0,
+        #e8b0ce
+      );
+      animation: haloSpin 12s linear infinite;
+      filter: drop-shadow(0 0 14px rgba(217, 138, 176, 0.3));
+    }
+
+    .portrait-halo::after {
+      content: "";
+      position: absolute;
+      inset: 4px;
+      border-radius: inherit;
+      background: #fff9fc;
+    }
+
+    .portrait-frame {
+      position: absolute;
+      inset: 0;
+      padding: 9px;
+      overflow: hidden;
+      border-radius: 48% 48% 35% 35%;
+      background: linear-gradient(145deg, #fff, #f4d5e5, #e5d8f9);
+      box-shadow:
+        0 24px 65px rgba(160, 93, 137, 0.2),
+        inset 0 0 0 1px rgba(255,255,255,0.8);
+    }
+
+    .portrait-frame img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      border-radius: inherit;
+      background: linear-gradient(145deg, #f9e8f0, #f0e8fb);
+    }
+
+    .portrait-caption {
+      position: absolute;
+      z-index: 2;
+      bottom: 22px;
+      right: -24px;
+      padding: 13px 18px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.91);
+      border: 1px solid white;
+      box-shadow: var(--shadow);
+      animation: captionFloat 4s ease-in-out infinite;
+    }
+
+    .portrait-caption strong {
+      display: block;
+      font-family: "Playfair Display", serif;
+      color: var(--pink-dark);
+      font-size: 1rem;
+    }
+
+    .portrait-caption small {
+      color: var(--muted);
+    }
+
+    .sparkle {
+      position: absolute;
+      z-index: 3;
+      color: #bd7aa3;
+      animation: sparkle 3s ease-in-out infinite;
+    }
+
+    .sparkle.s1 {
+      top: 8%;
+      right: -14%;
+      font-size: 1.5rem;
+    }
+
+    .sparkle.s2 {
+      bottom: 20%;
+      left: -15%;
+      font-size: 1.2rem;
+      animation-delay: -1.5s;
+    }
+
+    @keyframes haloSpin {
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes portraitFloat {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-10px) rotate(0.5deg); }
+    }
+
+    @keyframes captionFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-7px); }
+    }
+
+    @keyframes sparkle {
+      0%, 100% { opacity: 0.5; transform: scale(0.8) rotate(0deg); }
+      50% { opacity: 1; transform: scale(1.2) rotate(25deg); }
+    }
+
+    @keyframes enterLeft {
+      from { opacity: 0; transform: translateX(-25px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes enterRight {
+      from { opacity: 0; transform: translateX(25px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    /* About */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 25px;
+    }
+
+    .about-card {
+      padding: 30px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .about-card:hover, .info-card:hover, .project-card:hover,
+    .skill-card:hover, .contact-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 22px 48px rgba(120, 71, 106, 0.15);
+    }
+
+    .about-card h3 {
+      font-size: 1.45rem;
+      margin-bottom: 14px;
+    }
+
+    .about-card p {
+      color: var(--muted);
+    }
+
+    .fact-list {
+      display: grid;
+      gap: 15px;
+    }
+
+    .fact {
+      display: flex;
+      gap: 13px;
+      align-items: flex-start;
+    }
+
+    .fact i {
+      color: var(--pink-dark);
+      margin-top: 5px;
+      width: 20px;
+      text-align: center;
+    }
+
+    .fact span {
+      color: var(--muted);
+    }
+
+    .fact strong {
+      display: block;
+      color: var(--ink);
+    }
+
+    /* Education and certification */
+    .timeline {
+      max-width: 790px;
+      margin: auto;
+      display: grid;
+      gap: 20px;
+    }
+
+    .info-card {
+      display: grid;
+      grid-template-columns: 55px 1fr;
+      gap: 18px;
+      padding: 25px;
+      transition: 0.3s ease;
+    }
+
+    .info-icon {
+      display: grid;
+      place-items: center;
+      width: 52px;
+      height: 52px;
+      border-radius: 17px;
+      background: linear-gradient(145deg, #f8e1ed, #eee5fc);
+      color: var(--pink-dark);
+      font-size: 1.2rem;
+    }
+
+    .info-card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 6px;
+    }
+
+    .info-card p {
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .tag {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 5px 11px;
+      border-radius: 50px;
+      color: var(--pink-dark);
+      background: #f9e7f0;
+      font-size: 0.77rem;
+      font-weight: 700;
+    }
+
+    /* Major */
+    .major-panel {
+      padding: 38px;
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 25px;
+      align-items: start;
+    }
+
+    .major-icon {
+      width: 75px;
+      height: 75px;
+      border-radius: 24px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(140deg, #f5d6e6, #e3d8f7);
+      color: var(--pink-dark);
+      font-size: 2rem;
+    }
+
+    .major-panel h3 {
+      font-size: 1.65rem;
+      margin-bottom: 12px;
+    }
+
+    .major-panel p {
+      color: var(--muted);
+      margin-bottom: 15px;
+    }
+
+    .topic-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 18px;
+    }
+
+    .topic-tags span {
+      padding: 7px 12px;
+      background: rgba(249, 231, 240, 0.9);
+      color: #8e4f76;
+      border-radius: 50px;
+      font-size: 0.81rem;
+    }
+
+    /* Projects */
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .project-card {
+      padding: 27px;
+      transition: 0.3s ease;
+    }
+
+    .project-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 16px;
+    }
+
+    .project-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(145deg, #f8e1ed, #e9e0f8);
+      color: var(--pink-dark);
+      font-size: 1.2rem;
+    }
+
+    .project-card h3 {
+      font-size: 1.25rem;
+      margin-bottom: 10px;
+    }
+
+    .project-card p {
+      color: var(--muted);
+      font-size: 0.93rem;
+    }
+
+    /* Skills */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .skill-card {
+      text-align: center;
+      padding: 26px 18px;
+      transition: 0.3s ease;
+    }
+
+    .skill-card i {
+      display: block;
+      font-size: 1.7rem;
+      color: var(--pink-dark);
+      margin-bottom: 14px;
+    }
+
+    .skill-card h3 {
+      font-size: 1.05rem;
+      margin-bottom: 8px;
+    }
+
+    .skill-card p {
+      font-size: 0.86rem;
+      color: var(--muted);
+    }
+
+    /* Contact */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 25px;
+    }
+
+    .contact-card {
+      padding: 30px;
+      transition: 0.3s ease;
+    }
+
+    .contact-card h3 {
+      font-size: 1.4rem;
+      margin-bottom: 12px;
+    }
+
+    .contact-card > p {
+      color: var(--muted);
+      margin-bottom: 22px;
+    }
+
+    .social-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .social-links a {
+      display: grid;
+      place-items: center;
+      width: 43px;
+      height: 43px;
+      border-radius: 50%;
+      color: var(--pink-dark);
+      background: #f9e7f0;
+      transition: 0.25s ease;
+    }
+
+    .social-links a:hover {
+      color: white;
+      background: var(--pink-dark);
+      transform: translateY(-4px);
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.88rem;
+      font-weight: 700;
+      margin-bottom: 7px;
+    }
+
+    .form-group input, .form-group textarea {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      background: rgba(255,255,255,0.8);
+      padding: 12px 14px;
+      outline: none;
+      color: var(--ink);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .form-group input:focus, .form-group textarea:focus {
+      border-color: var(--pink);
+      box-shadow: 0 0 0 3px rgba(217, 138, 176, 0.12);
+    }
+
+    .form-group textarea {
+      min-height: 125px;
+      resize: vertical;
+    }
+
+    .form-note {
+      font-size: 0.79rem;
+      color: var(--muted);
+      margin-top: 12px;
+    }
+
+    /* Reveal on scroll */
+    .reveal {
+      opacity: 0;
+      transform: translateY(25px);
+      transition: opacity 0.75s ease, transform 0.75s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    footer {
+      text-align: center;
+      padding: 28px 7%;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      background: rgba(255,255,255,0.43);
+      font-size: 0.87rem;
+    }
+
+    footer .heart {
+      color: var(--pink-dark);
+    }
+
+    #backTop {
+      position: fixed;
+      bottom: 22px;
+      right: 22px;
+      z-index: 15;
+      width: 45px;
+      height: 45px;
+      border: 0;
+      border-radius: 50%;
+      color: white;
+      background: var(--pink-dark);
+      box-shadow: var(--shadow);
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: 0.25s ease;
+    }
+
+    #backTop.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .nav-links { gap: 13px; }
+      .nav-links a { font-size: 0.81rem; }
+      .hero { gap: 30px; }
+      .hero h1 { font-size: clamp(2.5rem, 6vw, 4rem); }
+      .portrait-caption { right: -5px; }
+      .skills-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 700px) {
+      header { padding: 14px 5%; }
+
+      .menu-toggle { display: block; }
+
+      .nav-links {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: 12px 5% 18px;
+        background: rgba(255, 250, 253, 0.97);
+        border-bottom: 1px solid var(--border);
+      }
+
+      .nav-links.open { display: flex; }
+
+      .nav-links a {
+        display: block;
+        padding: 11px 0;
+        font-size: 0.95rem;
+      }
+
+      section { padding: 76px 6%; }
+
+      #home {
+        min-height: auto;
+        padding-top: 120px;
+        padding-bottom: 75px;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 48px;
+      }
+
+      .hero-copy > p { margin-left: auto; margin-right: auto; }
+      .hero-actions { justify-content: center; }
+      .hero-visual { grid-row: 1; }
+      .portrait-wrap { width: min(285px, 70vw); }
+      .portrait-caption { right: -14px; bottom: 16px; }
+      .sparkle.s1 { right: -7%; }
+      .sparkle.s2 { left: -7%; }
+
+      .about-grid, .project-grid, .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .major-panel {
+        grid-template-columns: 1fr;
+        padding: 27px;
+      }
+
+      .major-icon { width: 62px; height: 62px; }
+      .info-card { padding: 20px; }
+      .about-card, .contact-card { padding: 24px; }
+    }
+
+    @media (max-width: 420px) {
+      .skills-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+      .skill-card { padding: 21px 12px; }
+      .hero h1 { font-size: 2.65rem; }
+      .info-card { grid-template-columns: 43px 1fr; gap: 12px; }
+      .info-icon { width: 43px; height: 43px; border-radius: 13px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+
+      .reveal { opacity: 1; transform: none; }
+      #network, #petals { display: none; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="background" aria-hidden="true">
+    <div class="orb one"></div>
+    <div class="orb two"></div>
+    <div class="orb three"></div>
+  </div>
+
+  <canvas id="network" aria-hidden="true"></canvas>
+  <div id="petals" aria-hidden="true"></div>
+
+  <header>
+    <nav aria-label="Main navigation">
+      <a href="#home" class="logo">J<span class="accent">.</span></a>
+
+      <button class="menu-toggle" id="menuToggle"
+        aria-label="Open navigation menu" aria-expanded="false">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#major">My Major</a></li>
+        <li><a href="#certification">Certification</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- HOME -->
+    <section id="home">
+      <div class="container hero">
+        <div class="hero-copy">
+          <span class="eyebrow">
+            <i class="fa-solid fa-sparkles"></i>
+            Welcome to my little corner of the web :>
+          </span>
+
+          <h1>Hello, I'm <span>Janelle Esmino.</span></h1>
+
+          <p>
+            A Network Design and Management student passionate about
+            technology, computer systems, networking, and continuous learning.
+            This is my space to share my background, skills, and projects.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#about" class="btn btn-primary">
+              Explore My Portfolio <i class="fa-solid fa-arrow-down"></i>
+            </a>
+            <a href="#contact" class="btn btn-outline">
+              <i class="fa-regular fa-envelope"></i> Contact Me
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="portrait-wrap">
+            <div class="portrait-halo"></div>
+
+            <div class="portrait-frame">
+              <!-- Keep your image file named me.png in this folder -->
+              <img
+                src="me.png"
+                alt="Portrait of Janelle Rubas Esmino"
+                onerror="this.onerror=null;this.src='https://placehold.co/500x650/f8e4ef/995879?text=Add+me.png';"
+              >
+            </div>
+
+            <i class="fa-solid fa-star sparkle s1"></i>
+            <i class="fa-solid fa-sparkles sparkle s2"></i>
+
+            <div class="portrait-caption">
+              <strong>Janelle Rubas Esmino</strong>
+              <small>Future IT Professional ✿</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="container">
+        <div class="section-heading reveal">
+          <span class="eyebrow">Get to know me</span>
+          <h2>About <span class="accent">Me</span></h2>
+          <p>A little introduction to who I am and what I am working toward.</p>
+        </div>
+
+        <div class="about-grid">
+          <article class="about-card glass reveal">
+            <h3>My Story <span class="accent">♡</span></h3>
+            <p>
+              I am Janelle Rubas Esmino, a student majoring in Network Design
+              and Management. I am interested in understanding how computer
+              systems communicate, how networks are organized, and how
+              technology can be used to solve real-world problems.
+            </p>
+            <br>
+            <p>
+              I believe that learning is a continuous process. Through my
+              studies and hands-on activities, I aim to improve my technical
+              abilities, problem-solving skills, and confidence as a future
+              IT professional.
+            </p>
+          </article>
+
+          <article class="about-card glass reveal">
+            <h3>Quick <span class="accent">Facts</span></h3>
+            <div class="fact-list">
+              <div class="fact">
+                <i class="fa-solid fa-graduation-cap"></i>
+                <div>
+                  <strong>Field of Study</strong>
+                  <span>Network Design and Management</span>
+                </div>
+              </div>
+
+              <div class="fact">
+                <i class="fa-solid fa-computer"></i>
+                <div>
+                  <strong>Technical Interest</strong>
+                  <span>Computer systems, networking, and troubleshooting</span>
+                </div>
+              </div>
+
+              <div class="fact">
+                <i class="fa-solid fa-award"></i>
+                <div>
+                  <strong>Certification</strong>
+                  <span>Computer Systems Servicing (CSS) NC II passer</span>
+                </div>
+              </div>
+
+              <div class="fact">
+                <i class="fa-solid fa-heart"></i>
+                <div>
+                  <strong>Personal Goal</strong>
+                  <span>To keep learning, improving, and building useful solutions</span>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section id="education">
+      <div class="container">
+        <div class="section-heading reveal">
+          <span class="eyebrow">My academic journey</span>
+          <h2>Educational <span class="accent">Background</span></h2>
+          <p>The schools that have been part of my learning journey.</p>
+        </div>
+
+        <div class="timeline">
+          <article class="info-card glass reveal">
+            <div class="info-icon">
+              <i class="fa-solid fa-building-columns"></i>
+            </div>
+            <div>
+              <h3>Nueva Vizcaya State University</h3>
+              <p>Higher education — Network Design and Management</p>
+              <span class="tag">College</span>
+            </div>
+          </article>
+
+          <article class="info-card glass reveal">
+            <div class="info-icon">
+              <i class="fa-solid fa-school"></i>
+            </div>
+            <div>
+              <h3>Bonfal National High School</h3>
+              <p>Secondary education</p>
+              <span class="tag">High School</span>
+            </div>
+          </article>
+
+          <article class="info-card glass reveal">
+            <div class="info-icon">
+              <i class="fa-solid fa-book-open"></i>
+            </div>
+            <div>
+              <h3>North Cabadbaran Central Elementary School</h3>
+              <p>Primary education</p>
+              <span class="tag">Elementary</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- MAJOR -->
+    <section id="major">
+      <div class="container">
+        <div class="section-heading reveal">
+          <span class="eyebrow">My field of study</span>
+          <h2>Network Design <span class="accent">& Management</span></h2>
+          <p>Learning the systems and connections that keep digital communication working.</p>
+        </div>
+
+        <article class="major-panel glass reveal">
+          <div class="major-icon">
+            <i class="fa-solid fa-network-wired"></i>
+          </div>
+
+          <div>
+            <h3>Connecting Technology, One Network at a Time</h3>
+            <p>
+              Network Design and Management focuses on how computer networks
+              are planned, configured, maintained, and troubleshot. It
+              develops an understanding of how devices connect and communicate
+              and how network systems can be managed effectively.
+            </p>
+            <p>
+              As I continue learning, I aim to strengthen my knowledge of
+              networking concepts, computer systems, network security, and
+              practical troubleshooting.
+            </p>
+
+            <div class="topic-tags">
+              <span>Computer Networking</span>
+              <span>Network Design</span>
+              <span>System Troubleshooting</span>
+              <span>Network Administration</span>
+              <span>Hardware</span>
+              <span>Technical Support</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- CERTIFICATION -->
+    <section id="certification">
+      <div class="container">
+        <div class="section-heading reveal">
+          <span class="eyebrow">My achievement</span>
+          <h2>Certifications &amp; <span class="accent">Training</span></h2>
+          <p>Recognizing technical knowledge and practical skills.</p>
+        </div>
+
+        <div class="timeline">
+          <article class="info-card glass reveal">
+            <div class="info-icon">
+              <i class="fa-solid fa-certificate"></i>
+            </div>
+            <div>
+              <h3>Computer Systems Servicing (CSS) NC II</h3>
+              <p>
+                NC II passer. This qualification is associated with practical
+                computer servicing competencies such as installing and
+                configuring computer systems, setting up networks, and
+                performing maintenance and troubleshooting tasks.
+              </p>
+              <span class="tag">
+                <i class="fa-solid fa-check"></i> NC II Passer
+              </span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+      <div class="container">
+        <div class="section-heading reveal">
+          <span class="eyebrow">Learning by doing</span>
+          <h2>My <span class="accent">Projects</span></h2>
+          <p>A space for academic activities, practical exercises, and future projects.</p>
+        </div>
+
+        <div class="project-grid">
+          <article class="project-card glass reveal">
+            <div class="project-top">
+              <div class="project-icon"><i class="fa-solid fa-network-wired"></i></div>
+              <span class="tag">Networking</span>
+            </div>
+            <h3>Network Design Practice</h3>
+            <p>
+              A place to document network diagrams, device connections,
+              addressing plans, and network configuration exercises as they
+              are completed.
+            </p>
+          </article>
+
+          <article class="project-card glass reveal">
+            <div class="project-top">
+              <div class="project-icon"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+              <span class="tag">CSS NC II</span>
+            </div>
+            <h3>Computer Systems Servicing</h3>
+            <p>
+              A collection of computer hardware, software installation,
+              maintenance, and troubleshooting activities from practical
+              learning experiences.
+            </p>
+          </article>
+
+          <article class="project-card glass reveal">
+            <div class="project-top">
+              <div class="project-icon"><i class="fa-solid fa-code"></i></div>
+              <span class="tag">Web Design</span>
+            </div>
+            <h3>Personal Portfolio Website</h3>
+            <p>
+              This portfolio presents my background and interests through
+              a responsive layout, animated network visualization, and a
+              soft pink-lavender design.
+            </p>
+          </article>
+
+          <article class="project-card glass reveal">
+            <div class="project-top">
+              <div class="project-icon"><i class="fa-solid fa-book-open"></i></div>
+              <span class="tag">Academic</span>
+            </div>
+            <h3>Learning Documentation</h3>
+            <p>
+              A place to organize technical notes, research, classroom
+              activities, and lessons learned throughout my studies.
+            </p>
+          </article>
+        </div>
+
+        <p style="text-align:center;color:var(--muted);font-size:.85rem;margin-top:22px">
+      
+        </p>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills">
+      <div class="container">
+        <div class="section-heading reveal">
+          <span class="eyebrow">What I am developing</span>
+          <h2>Skills &amp; <span class="accent">Interests</span></h2>
+          <p>Technical areas I have studied or am continuing to develop.</p>
+        </div>
+
+        <div class="skills-grid">
+          <article class="skill-card glass reveal">
+            <i class="fa-solid fa-desktop"></i>
+            <h3>Computer Hardware</h3>
+            <p>Understanding computer components and basic maintenance.</p>
+          </article>
+
+          <article class="skill-card glass reveal">
+            <i class="fa-solid fa-network-wired"></i>
+            <h3>Networking</h3>
+            <p>Learning network structures, connectivity, and configuration.</p>
+          </article>
+
+          <article class="skill-card glass reveal">
+            <i class="fa-solid fa-screwdriver-wrench"></i>
+            <h3>Troubleshooting</h3>
+            <p>Identifying technical issues and exploring practical solutions.</p>
+          </article>
+
+          <article class="skill-card glass reveal">
+            <i class="fa-brands fa-html5"></i>
+            <h3>Web Development</h3>
+            <p>Exploring HTML, CSS, and interactive website design.</p>
+          </article>
+
+          <article class="skill-card glass reveal">
+            <i class="fa-solid fa-shield-halved"></i>
+            <h3>Network Security</h3>
+            <p>Developing knowledge of safe and responsible network practices.</p>
+          </article>
+
+          <article class="skill-card glass reveal">
+            <i class="fa-solid fa-lightbulb"></i>
+            <h3>Problem Solving</h3>
+            <p>Approaching technical challenges with curiosity and patience.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="container">
+        <div class="section-heading reveal">
+          <span class="eyebrow">Let's connect</span>
+          <h2>Get in <span class="accent">Touch</span></h2>
+          <p>Feel free to reach out for academic connections, collaboration, or conversation.</p>
+        </div>
+
+        <div class="contact-grid">
+          <article class="contact-card glass reveal">
+            <h3>Contact Information</h3>
+            <p>
+              You can connect with me through email or visit my social
+              profiles using the links below.
+            </p>
+
+            <div class="fact">
+              <i class="fa-regular fa-envelope"></i>
+              <div>
+                <strong>Email</strong>
+                <span>jar_esmino@nvsu.edu.ph</span>
+              </div>
+            </div>
+
+            <div class="social-links">
+              <!-- Replace the placeholder URLs with your real profiles -->
+              <a href="https://facebook.com/j.ellecaramel" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                <i class="fa-brands fa-facebook-f"></i>
+              </a>
+              <a href="https://instagram.com/iellecarame" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                <i class="fa-brands fa-instagram"></i>
+              </a>
+              <a href="https://github.com/jajanellerubasesmino-hue" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                <i class="fa-brands fa-github"></i>
+              </a>
+              <a href="https://linkedin.com/in/jajanelle" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                <i class="fa-brands fa-linkedin-in"></i>
+              </a>
+            </div>
+          </article>
+
+          <article class="contact-card glass reveal">
+            <h3>Send a Message</h3>
+
+            <form id="contactForm">
+              <div class="form-group">
+                <label for="senderName">Your Name</label>
+                <input id="senderName" name="name" type="text" placeholder="Enter your name" required>
+              </div>
+
+              <div class="form-group">
+                <label for="senderEmail">Your Email</label>
+                <input id="senderEmail" name="email" type="email" placeholder="you@example.com" required>
+              </div>
+
+              <div class="form-group">
+                <label for="senderMessage">Message</label>
+                <textarea id="senderMessage" name="message" placeholder="Write your message..." required></textarea>
+              </div>
+
+              <button type="submit" class="btn btn-primary">
+                <i class="fa-regular fa-paper-plane"></i> Send Message
+              </button>
+
+              <p class="form-note">
+               
+              </p>
+            </form>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>
+      © <span id="year"></span> Janelle Rubas Esmino.
+      Made with <span class="heart">♥</span> and a little creativity.
+    </p>
+  </footer>
+
+  <button id="backTop" aria-label="Back to top">
+    <i class="fa-solid fa-arrow-up"></i>
+  </button>
+
+  <script>
+    // Current year
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Mobile navigation
+    const menuToggle = document.getElementById("menuToggle");
+    const navLinks = document.getElementById("navLinks");
+
+    menuToggle.addEventListener("click", () => {
+      const isOpen = navLinks.classList.toggle("open");
+      menuToggle.setAttribute("aria-expanded", String(isOpen));
+      menuToggle.innerHTML = isOpen
+        ? '<i class="fa-solid fa-xmark"></i>'
+        : '<i class="fa-solid fa-bars"></i>';
+    });
+
+    navLinks.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.innerHTML = '<i class="fa-solid fa-bars"></i>';
+      });
+    });
+
+    // Reveal sections as they enter the viewport
+    const revealItems = document.querySelectorAll(".reveal");
+
+    if ("IntersectionObserver" in window) {
+      const revealObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+
+      revealItems.forEach(item => revealObserver.observe(item));
+    } else {
+      revealItems.forEach(item => item.classList.add("visible"));
+    }
+
+    // Back-to-top button
+    const backTop = document.getElementById("backTop");
+
+    window.addEventListener("scroll", () => {
+      backTop.classList.toggle("show", window.scrollY > 450);
+    }, { passive: true });
+
+    backTop.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    // Animated network background
+    (() => {
+      const canvas = document.getElementById("network");
+      const ctx = canvas.getContext("2d");
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+      let width = 0;
+      let height = 0;
+      let points = [];
+      let animationId = null;
+      let lastFrame = 0;
+
+      const spacing = 115;
+      const connectionDistance = 145;
+
+      function resizeCanvas() {
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        width = window.innerWidth;
+        height = window.innerHeight;
+
+        canvas.width = Math.round(width * dpr);
+        canvas.height = Math.round(height * dpr);
+        canvas.style.width = width + "px";
+        canvas.style.height = height + "px";
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+        const count = Math.min(
+          115,
+          Math.max(35, Math.round((width * height) / 14500))
+        );
+
+        points = Array.from({ length: count }, () => ({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          vx: (Math.random() - 0.5) * 0.38,
+          vy: (Math.random() - 0.5) * 0.38,
+          r: Math.random() * 1.6 + 1
+        }));
+      }
+
+      function drawNetwork(timestamp = 0) {
+        animationId = requestAnimationFrame(drawNetwork);
+
+        // Limit redraws on slower devices
+        if (timestamp - lastFrame < 30) return;
+        lastFrame = timestamp;
+
+        ctx.clearRect(0, 0, width, height);
+
+        for (let i = 0; i < points.length; i++) {
+          const p = points[i];
+
+          p.x += p.vx;
+          p.y += p.vy;
+
+          if (p.x < 0 || p.x > width) p.vx *= -1;
+          if (p.y < 0 || p.y > height) p.vy *= -1;
+
+          p.x = Math.max(0, Math.min(width, p.x));
+          p.y = Math.max(0, Math.min(height, p.y));
+
+          for (let j = i + 1; j < points.length; j++) {
+            const q = points[j];
+            const dx = p.x - q.x;
+            const dy = p.y - q.y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+
+            if (distance < connectionDistance) {
+              const alpha = (1 - distance / connectionDistance) * 0.25;
+
+              ctx.beginPath();
+              ctx.moveTo(p.x, p.y);
+              ctx.lineTo(q.x, q.y);
+              ctx.strokeStyle = `rgba(181, 112, 160, ${alpha})`;
+              ctx.lineWidth = 0.8;
+              ctx.stroke();
+            }
+          }
+
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = "rgba(180, 105, 157, 0.54)";
+          ctx.fill();
+
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r + 3, 0, Math.PI * 2);
+          ctx.fillStyle = "rgba(214, 154, 193, 0.09)";
+          ctx.fill();
+        }
+      }
+
+      function startNetwork() {
+        if (animationId !== null) return;
+        animationId = requestAnimationFrame(drawNetwork);
+      }
+
+      function stopNetwork() {
+        if (animationId !== null) {
+          cancelAnimationFrame(animationId);
+          animationId = null;
+        }
+      }
+
+      function updateMotionPreference() {
+        stopNetwork();
+        if (reduceMotion.matches) {
+          ctx.clearRect(0, 0, width, height);
+        } else {
+          startNetwork();
+        }
+      }
+
+      resizeCanvas();
+      updateMotionPreference();
+
+      window.addEventListener("resize", resizeCanvas);
+      reduceMotion.addEventListener?.("change", updateMotionPreference);
+
+      // Pause the animation when the tab is not visible
+      document.addEventListener("visibilitychange", () => {
+        if (document.hidden) {
+          stopNetwork();
+        } else if (!reduceMotion.matches) {
+          startNetwork();
+        }
+      });
+    })();
+
+    // Floating falling petals
+    (() => {
+      const container = document.getElementById("petals");
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+      if (reduceMotion.matches) return;
+
+      const symbols = ["✿", "❀", "✧", "·", "❋"];
+      const petalCount = window.innerWidth < 600 ? 12 : 22;
+
+      for (let i = 0; i < petalCount; i++) {
+        const petal = document.createElement("span");
+        petal.className = "petal";
+        petal.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+        petal.style.left = Math.random() * 100 + "%";
+        petal.style.fontSize = (10 + Math.random() * 13) + "px";
+        petal.style.animationDuration = (12 + Math.random() * 17) + "s";
+        petal.style.animationDelay = (-Math.random() * 25) + "s";
+        container.appendChild(petal);
+      }
+    })();
+
+    // Contact form: prepares an email in the visitor's email application
+    document.getElementById("contactForm").addEventListener("submit", event => {
+      event.preventDefault();
+
+      // IMPORTANT: Replace this with your actual email address.
+      const recipient = "jar_esmino@nvsu.edu.ph";
+
+      if (recipient === "jar_esmino@nvsu.edu.ph") {
+        return;
+      }
+
+      const name = document.getElementById("senderName").value.trim();
+      const senderEmail = document.getElementById("senderEmail").value.trim();
+      const message = document.getElementById("senderMessage").value.trim();
+
+      const subject = encodeURIComponent("Portfolio message from " + name);
+      const body = encodeURIComponent(
+        "Name: " + name + "\n" +
+        "Email: " + senderEmail + "\n\n" +
+        "Message:\n" + message
+      );
+
+      window.location.href =
+        "mailto:" + recipient + "?subject=" + subject + "&body=" + body;
+    });
+  </script>
+</body>
+</html>
